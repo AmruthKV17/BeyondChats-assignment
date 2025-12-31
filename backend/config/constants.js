@@ -1,0 +1,8 @@
+module.exports = {
+  REQUIRED_SOURCES: 2,
+  SCRAPE_TIMEOUT: 20000,
+  DELAY_BETWEEN_ARTICLES: 2000,
+  MAX_CONTENT_LENGTH: 2000,
+  MAX_ORIGINAL_CONTENT: 1000,
+  USER_AGENT: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+};
