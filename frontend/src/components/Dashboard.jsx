@@ -12,7 +12,7 @@ const Dashboard = () => {
     // Mock data fallback if API fails
     const fetchArticles = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/articles');
+        const response = await fetch('https://beyondchats-assignment-backend-7s9j.onrender.com/api/articles');
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setArticles(data);
