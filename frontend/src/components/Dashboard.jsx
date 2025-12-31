@@ -65,10 +65,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="mb-12 text-center relative">
+    <div className="min-h-screen w-full px-4 py-8">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
+      <header className="mb-12 text-center relative w-full max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-neon-purple to-secondary inline-block mb-4">
-          AI Blog Editor
+          AI-powered Content Automation System
         </h1>
         <p className="text-gray-400 max-w-2xl mx-auto">
           Transform your rough drafts into polished, professional articles with our advanced AI engine.
@@ -76,15 +77,60 @@ const Dashboard = () => {
       </header>
 
       {loading ? (
-        <div className="flex justify-center items-center h-64">
-           <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+        <div className="flex flex-col justify-center items-center h-[60vh] gap-8 w-full">
+           <div className="relative w-24 h-24">
+             {/* Outer Ring */}
+             <motion.div 
+               className="absolute inset-0 rounded-full border-2 border-primary/30 border-t-primary"
+               animate={{ rotate: 360 }}
+               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+             />
+             {/* Inner Ring */}
+             <motion.div 
+               className="absolute inset-2 rounded-full border-2 border-secondary/30 border-b-secondary"
+               animate={{ rotate: -360 }}
+               transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+             />
+             {/* Central Pulse */}
+             <motion.div 
+               className="absolute inset-[30%] bg-neon-purple/50 rounded-full blur-sm"
+               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+               transition={{ duration: 2, repeat: Infinity }}
+             />
+           </div>
+           
+           <div className="flex flex-col items-center gap-2">
+             <motion.h3 
+                className="text-xl font-mono text-primary tracking-widest"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+             >
+               INITIALIZING...
+             </motion.h3>
+             <div className="flex gap-1 h-1">
+               {[...Array(3)].map((_, i) => (
+                 <motion.div
+                   key={i}
+                   className="w-8 h-full bg-secondary"
+                   initial={{ scaleX: 0 }}
+                   animate={{ scaleX: 1 }}
+                   transition={{ 
+                     duration: 0.5, 
+                     repeat: Infinity, 
+                     delay: i * 0.2,
+                     repeatDelay: 1 
+                   }}
+                 />
+               ))}
+             </div>
+           </div>
         </div>
       ) : (
         <motion.div 
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl"
         >
           {articles.map((article) => (
             <motion.div key={article._id} variants={item}>
@@ -103,6 +149,7 @@ const Dashboard = () => {
           onClose={() => setSelectedArticle(null)} 
         />
       )}
+      </div>
     </div>
   );
 };
